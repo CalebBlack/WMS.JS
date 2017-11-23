@@ -5,3 +5,4 @@ class Lost extends React.Component {
     return (<p>You seem to be lost...</p>)
   }
 }
+export default Lost;

@@ -2,7 +2,7 @@ const express = require('express');
 const Isemail = require('isemail');
 const bcrypt = require('bcrypt');
 const RateLimit = require('express-rate-limit');
-const {disconnect} = require('./sockets');
+//const {disconnect} = require('./sockets');
 
 const {
   User, Session
@@ -110,7 +110,7 @@ api.get('/login', (req, res) => {
 
 api.get('/logout',(req,res)=>{
   authenticateSession(req).then(session=>{
-    disconnect(session._id);
+    //disconnect(session._id);
     session.remove(err=>{
       if (err) return res.status(500).send('error');
       res.status(200).send('Logout Successful');

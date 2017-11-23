@@ -4,7 +4,6 @@ import Background from './components/background';
 import {initialize} from './redux/actions/login';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import Header from './components/header';
 import './app.css';
 
 class App extends React.Component {
@@ -14,7 +13,6 @@ class App extends React.Component {
   render(){
     return (
       <div id='app'>
-        <Header/>
         <Background/>
         <Router/>
       </div>

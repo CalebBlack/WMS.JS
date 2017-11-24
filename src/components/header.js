@@ -1,9 +1,23 @@
 import React from 'react';
+import './header.less';
 
 class Header extends React.Component {
   render(){
     return (
-      <header>head stuff</header>
+      <header className='primary'>
+        <Nav links={[['First','firstlink'],['Second','secondlink'],['Third','thirdlink']]}/>
+      </header>
+    )
+  }
+}
+class Nav extends React.Component {
+  render(){
+    return (
+      <nav>
+        <ul className='links'>
+          {this.props.links.map((link,index)=>{return (<li><a href={link[1]} key={index}/>{link[0]}</li>)})}
+        </ul>
+      </nav>
     )
   }
 }

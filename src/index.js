@@ -4,6 +4,7 @@ import App from './app';
 import {BrowserRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import './index.css';
+import './fonts.css';
 import store from './redux/store';
 
 window.addEventListener('load',()=>{

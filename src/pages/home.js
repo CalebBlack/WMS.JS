@@ -3,8 +3,12 @@ import Header from '../components/header';
 
 class Home extends React.Component {
   render(){
-    <Header/>
-    return (<p>There&#39;s no place like home...</p>)
+    return (
+      <div className='home'>
+        <Header/>
+        <p>There&#39;s no place like home...</p>
+      </div>
+    )
   }
 }
 

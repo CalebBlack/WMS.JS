@@ -1,21 +1,41 @@
 header.primary {
   & > nav {
     margin-top: 50px;
+    color: white;
     & > ul.links {
       padding:0 50px;
-      background-color: #cfe3ec73;
       display: table;
       table-layout: fixed;
       width: ~'calc(100% - 100px)';
       list-style: none;
       margin:0;
-      line-height: 80px;
       & > li {
         font-size: 2em;
         display: table-cell;
         text-align: center;
         font-family: 'Vollkorn SC', serif;
         margin: 0 10px;
+        position: relative;
+        height: 80px;
+        line-height: 80px;
+        & > a {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%,-50%);
+          width: ~'calc(100% - 24px)';
+          height: 100%;
+          display: block;
+          transition: border-color 0.5s ease-in, text-shadow 0.3s linear;
+          border: 2px solid transparent;
+          border-width: 0 2px;
+          border-radius: 10px;
+          &:hover {
+            transition: border-color 0.3s ease-out, text-shadow 0.1s linear;
+            border-color: white;
+            //text-shadow: 0 0 4px white;
+          }
+        }
       }
     }
   }

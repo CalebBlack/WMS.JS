@@ -5,7 +5,7 @@ class Header extends React.Component {
   render(){
     return (
       <header className='primary'>
-        <Nav links={[['Movies','movies'],['Anime','anime'],['Favorite','favorite'],['All','all']]}/>
+        <Nav links={[['Favorite','favorite'],['Anime','anime'],['Movies','movies']]}/>
       </header>
     )
   }
@@ -15,7 +15,7 @@ class Nav extends React.Component {
     return (
       <nav>
         <ul className='links'>
-          {this.props.links.map((link,index)=>{return (<li><a href={link[1]} key={index}>{link[0]}</a></li>)})}
+          {this.props.links.map((link,index)=>{return (<li key={index}><a href={link[1]}>{link[0]}</a></li>)})}
         </ul>
       </nav>
     )

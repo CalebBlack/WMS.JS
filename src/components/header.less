@@ -19,6 +19,8 @@ header.primary {
         height: 80px;
         line-height: 80px;
         & > a {
+          color: grey;
+          overflow: hidden;
           position: absolute;
           left: 50%;
           top: 50%;
@@ -26,15 +28,40 @@ header.primary {
           width: ~'calc(100% - 24px)';
           height: 100%;
           display: block;
-          transition: border-color 0.5s ease-in, text-shadow 0.3s linear;
+          transition: border-color 0.5s ease-in, text-shadow 0.3s linear, color 0.2s ease;
           border: 2px solid transparent;
           border-width: 0 2px;
           border-radius: 10px;
           &:hover {
-            transition: border-color 0.3s ease-out, text-shadow 0.1s linear;
-            border-color: white;
-            //text-shadow: 0 0 4px white;
+            color: #c1c1c1;
+            transition: border-color 0.3s ease-out, text-shadow 0.1s linear, color 0.2s ease;
+            border-color: #c1c1c1;
+            //  text-shadow: 0 0 4px white;
           }
+        }
+      }
+    }
+  }
+}
+header.primary {
+  & > nav {
+
+    & > ul.links {
+
+      & > li {
+        @media (max-width:800px) {
+          font-size: 1.5em;
+        }
+        @media (max-width:650px) {
+          font-size: 1.2em;
+        }
+        @media (max-width:550px) {
+          font-size: 1em;
+        }
+        @media (max-width:475px) {
+          font-size: 0.8em;
+        }
+        & > a {
         }
       }
     }

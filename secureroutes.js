@@ -14,6 +14,6 @@ secureRoutes.use((req,res,next)=>{
   });
 });
 
-secureMap.forEach(route=>{secureRoutes[route[1]](route[2],route[0])});
+secureMap.forEach(route=>{console.log(route);secureRoutes[route[0]](route[1],route[2])});
 
 module.exports = secureRoutes;

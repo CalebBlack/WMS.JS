@@ -6,3 +6,6 @@
   font-family: 'Roboto', sans-serif;
   color: #efefef;
 }
+#app h1, #app h2, #app h3 {
+  font-family: 'Vollkorn SC', serif;
+}

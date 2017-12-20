@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const compression = require('compression');
+const cookieParser = require('cookie-parser');
 //const enforce = require('express-sslify');
 
 const api = require('./api');
@@ -21,6 +22,7 @@ try {
 // MIDDLEWARE
 //app.use(enforce.HTTPS());
 app.use(compression());
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(helmet());
 app.use(helmet.referrerPolicy({ policy: 'same-origin' }));

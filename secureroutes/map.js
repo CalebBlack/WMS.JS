@@ -1,1 +1,1 @@
-module.exports = ['validateauth','shows'].map(name=>{return require('./'+name)});
+module.exports = ['validateauth','shows','movies'].map(name=>{return require('./'+name)});

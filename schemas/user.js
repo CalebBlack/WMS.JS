@@ -5,5 +5,7 @@ module.exports = {
   created: { type: Date, default: Date.now },
   hash: {type:String,required:true},
   admin: {type:Boolean,required:true,default:false},
-  banned:{type:Boolean,required:true,default:false}
+  banned: {type:Boolean,required:true,default:false},
+  adult: {type:Boolean,required:true,default:false},
+  approved: {type:Boolean,required:true,default:false}
 }

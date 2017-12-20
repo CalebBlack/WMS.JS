@@ -4,7 +4,7 @@ const decodeAuthHeaders = require('./decodeauthheaders');
 function authenticateRequest(req){
   return new Promise((resolve,reject)=>{
     auth = decodeAuthHeaders(req);
-    if (auth && auth.length == 2) {
+    if (auth && auth.length == 2 && auth[0].length > 0 && auth[1].length > 7) {
       User.findOne({username:auth[0]},(err,user)=>{
         if (err) return reject(err);
         if (!user) return reject('banned');

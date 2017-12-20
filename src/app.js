@@ -4,7 +4,7 @@ import Background from './components/background';
 import {initialize} from './redux/actions/login';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import './app.css';
+import './app.less';
 
 class App extends React.Component {
   componentDidMount(){

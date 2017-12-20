@@ -35,7 +35,8 @@ api.get('/', (req, res) => {
 // define the about route
 api.post('/signup', (req, res) => {
   auth = decodeAuthHeaders(req);
-  if (auth && auth.length == 2) {
+  auth[0] = auth[0].toLowerCase();
+  if (auth && auth.length == 2 && auth[0].length > 0 && auth[1].length > 7) {
     let usernameValid = validate.username(auth[0]);
     let passwordValid = validate.password(auth[1]);
     if (usernameValid === true && passwordValid === true) {

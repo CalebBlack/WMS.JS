@@ -32,27 +32,34 @@ api.use('/signup',authLimiter);
 api.get('/', (req, res) => {
   res.status(200).send('Cards Against Humanity API');
 });
+
 // define the about route
 api.post('/signup', (req, res) => {
   auth = decodeAuthHeaders(req);
   auth[0] = auth[0].toLowerCase();
+  step();
   if (auth && auth.length == 2 && auth[0].length > 0 && auth[1].length > 7) {
+    step();
     let usernameValid = validate.username(auth[0]);
     let passwordValid = validate.password(auth[1]);
     if (usernameValid === true && passwordValid === true) {
       if (req.body) {
         if (req.body.email) {
-          if (typeof req.body.email == 'string' && Isemail.validate(req.body.email)) {
+          if (typeof req.body.email == 'string' && Isemail.validate(req.body.email) && req.body.email.length > 4) {
+            step();
             var userData = {
               displayname: auth[0],
               username: auth[0],
               email: req.body.email
             };
             bcrypt.hash(auth[1], 10, function(err, hash) {
+              if (err) console.log(err);
               if (err) return res.status(500).send();
               userData.hash = hash;
               var userEntry = new User(userData);
+              console.log(userData);
               userEntry.save((err,user)=>{
+                if (err) console.log('user save error',err);
                 if (err) return res.status(500).send();
                 var userOut = {username:user.username,displayname:user.displayname};
                 getSession(user).then(session=>{
@@ -62,7 +69,7 @@ api.post('/signup', (req, res) => {
                 }).catch(err=>{
                   return res.status(200).json({user:userOut,session:'error'});
                 });
-              })
+              });
             });
           } else {
             res.status(400).send('Malformed Email');

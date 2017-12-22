@@ -26,6 +26,7 @@ class Login extends React.Component {
     let username = this.username ? this.username.value : null;
     let password = this.password ? this.password.value : null;
     if (typeof username == 'string' && typeof password == 'string' && username.length > 0 && password.length > 7) {
+      console.log(username,password);
       this.props.dispatch(loginActions.login(username,password));
     }
   }

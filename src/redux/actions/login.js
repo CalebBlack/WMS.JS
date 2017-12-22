@@ -3,13 +3,12 @@ import {setLoginStatus} from '../actiontypes';
 import request from '../../functions/request';
 import safeParse from '../../functions/safeParse';
 
-export function login(username,password,callback) {
+export function login(username,password,callback=()=>{}) {
   return dispatch=>{
     dispatch({type:setLoginStatus,loginStatus:loginStatuses.loggingIn});
     request('/api/login','get',{auth:[username,password]}).then(response=>{
       let data = safeParse(response);
-      if (callback) callback();
-      if (data && data.session && data.session.id) localStorage.sessionID = data.session.id;
+      if (data && data.session && data.session.id) localStorage.session = data.session.id;
       dispatch({type:setLoginStatus,loginStatus:loginStatuses.loggedIn});
     }).catch(err=>{
       if (callback) callback(err);

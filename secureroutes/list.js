@@ -11,14 +11,14 @@ function list(type){
           output.movies.push(name);
         } else {
           output.shows[name] = {};
-          fs.readdirSync(path.join('raw/',type+'/',name+'/'),(err,files)=>{
-            if (err || !files) reject(err);
-            files.forEach(season=>{
-              fs.readdirSync(path.join('raw/',type+'/',name+'/',season+'/'),(err,episodes)=>{
-                if (err || !episodes) reject(err);
-                output.shows[name][season] = episodes;
-              });
-            });
+          let files = fs.readdirSync(path.join('raw/',type+'/',name+'/'));
+          console.log('files',files);
+          if (!files) reject('missing files');
+          console.log('seasons',files);
+          files.forEach(season=>{
+              let episodes = fs.readdirSync(path.join('raw/',type+'/',name+'/',season+'/'));
+              if (!episodes) reject('missing episodes');
+              output.shows[name][season] = episodes;
           });
         }
       });

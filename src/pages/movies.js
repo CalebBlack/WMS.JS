@@ -25,4 +25,4 @@ class Movies extends React.Component {
     </div>);
   }
 }
-export default connect(state=>{console.log('state',state);return {movies:state.lists.movies}})(Movies);
+export default connect(state=>{return {movies:state.lists.movies}})(Movies);

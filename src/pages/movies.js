@@ -12,23 +12,19 @@ function toTitleCase(str){
 class Movies extends React.Component {
   constructor(props){
     super(props);
-    this.state={movies:'loading'}
   }
   componentWillMount(){
-    this.props.dispatch(getList('movies',(err,list)=>{
-      if (err) return console.log('err',err);
-      console.log('list',list);
-      this.setState(Object.assign({},this.state,{movies:list}));
-    }));
+    this.props.dispatch(getList('movies'));
   }
   render(){
+    console.log('movies',(this.props || {}).movies);
     return (
     <div className='movies'>
       <h1 className='title'>Movies</h1>
-      {this.state.movies === 'loading' ? <p>loading</p> : this.state.movies.map((movie,index)=>{
-        return (<Link className='movie' key={index} to={'/movies/'+movie}>{toTitleCase(movie.split('.')[0])}</Link>)
-      })}
+      {!this.props || !this.props.movies ? <p>loading</p> : <ul className='movielist'>{this.props.movies.map((movie,index)=>{
+        return (<li key={index} className='movie'><Link to={'/movies/'+movie}>{toTitleCase(movie.split('.')[0])}</Link></li>)
+      })}</ul>}
     </div>);
   }
 }
-export default connect()(Movies);
+export default connect(state=>{console.log('state',state);return {movies:state.lists.movies}})(Movies);

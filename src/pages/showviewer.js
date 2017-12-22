@@ -10,8 +10,9 @@ class AnimeViewer extends React.Component {
     if (!this.props || !this.props.path) {
       return null;
     }
-    if ( !this.props.anime) {
-      this.props.dispatch(getList('anime'));
+    let type = this.props.type;
+    if (!this.props.lists || !this.props.lists[type]) {
+      this.props.dispatch(getList(type));
       return (<p>Loading...</p>)
     }
     let path = this.props.path;
@@ -19,20 +20,20 @@ class AnimeViewer extends React.Component {
     let show = parts[0];
     let season = parts[1];
     let episode = parts[2];
-    let data = this.props.anime.shows[show];
+    let data = this.props.lists[type].shows[show];
     if (show) {
       if (season) {
         if (episode) {
-          return (this.renderVideo('/api/anime'+this.path));
+          return (this.renderVideo('/api/'+type+'/'+this.path));
         } else {
           return (
             <div className='anime'>
             <HomeLink/>
             <h1 className='title'>Episodes</h1>
             <ul className='list episodelist'>
-              {this.props.anime.shows[show][season].map((episode,index)=>{
+              {this.props.lists[type].shows[show][season].map((episode,index)=>{
                 return (
-                  <li key={index} className='episode'><Link onClick={this.forceUpdate} to={'/anime/'+show+'/'+season+'/'+episode}>{toTitleCase(episode.split('.')[0])}</Link></li>
+                  <li key={index} className='episode'><Link onClick={this.forceUpdate} to={'/'+type+'/'+show+'/'+season+'/'+episode}>{toTitleCase(episode.split('.')[0])}</Link></li>
                 );
               })}
             </ul>
@@ -59,4 +60,4 @@ class AnimeViewer extends React.Component {
     }
   }
 }
-export default connect(state=>{return {anime:state.lists.anime}})(AnimeViewer);
+export default connect(state=>{return {lists:state.lists}})(AnimeViewer);

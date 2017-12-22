@@ -3,7 +3,7 @@ import Player from '../components/player';
 import {Link, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import AnimeViewer from './animeviewer';
+import ShowViewer from './showviewer';
 import './viewer.less';
 
 class Viewer extends React.Component {
@@ -28,16 +28,12 @@ class Viewer extends React.Component {
   render(){
     if (this.state.redirect !== null) {
       return (<Redirect to={this.state.redirect}/>);
-    } else if (this.type === 'anime'){
+    } else {
       if (this.path.includes('.')) {
         return this.renderVideo('/api/'+this.type+'/'+this.path);
       } else {
-        return (<AnimeViewer path={this.path}/>);
+        return (<ShowViewer type={this.type} path={this.path}/>);
       }
-    } else if (this.type === 'movies') {
-      return this.renderVideo('/api/'+this.type+'/'+this.path);
-    } else {
-      return (<p>Loading...</p>);
     }
   }
   renderVideo(url) {

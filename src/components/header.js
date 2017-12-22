@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import './header.less';
 
 class Header extends React.Component {
@@ -15,7 +16,7 @@ class Nav extends React.Component {
     return (
       <nav>
         <ul className='links'>
-          {this.props.links.map((link,index)=>{return (<li key={index}><a href={link[1]}>{link[0]}</a></li>)})}
+          {this.props.links.map((link,index)=>{return (<li key={index}><Link to={link[1]}>{link[0]}</Link></li>)})}
         </ul>
       </nav>
     )

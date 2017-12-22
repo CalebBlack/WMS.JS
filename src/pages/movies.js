@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import getList from '../redux/actions/getlist';
 import request from '../functions/request';
+import HomeLink from '../components/homelink';
 import './movies.less';
 
 function toTitleCase(str){
@@ -10,16 +11,13 @@ function toTitleCase(str){
 }
 
 class Movies extends React.Component {
-  constructor(props){
-    super(props);
-  }
   componentWillMount(){
     this.props.dispatch(getList('movies'));
   }
   render(){
-    console.log('movies',(this.props || {}).movies);
     return (
     <div className='movies'>
+      <HomeLink/>
       <h1 className='title'>Movies</h1>
       {!this.props || !this.props.movies ? <p>loading</p> : <ul className='movielist'>{this.props.movies.map((movie,index)=>{
         return (<li key={index} className='movie'><Link to={'/movies/'+movie}>{toTitleCase(movie.split('.')[0])}</Link></li>)

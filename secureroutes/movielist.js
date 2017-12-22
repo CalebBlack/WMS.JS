@@ -6,7 +6,7 @@ let movielist = null;
 
 fs.readdir(path.join('raw/','movies/'),(err,files)=>{
   if (err) return movielist = err;
-  movielist = files.filter(moviename=>!moviename.endsWith('.gitignore'));
+  movielist = files.filter(moviename=>!['.gitignore','.ds_store'].includes(moviename.toLowerCase()));
 });
 
 module.exports = ['get','/movies',(req,res)=>{

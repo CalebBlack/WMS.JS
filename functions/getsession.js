@@ -2,6 +2,9 @@ const {Session} = require('../models');
 
 function getSession(user){
   return new Promise((resolve,reject)=>{
+    if (user.approved !== true){
+      return reject('User not approved');
+    }
     Session.findOne({owner:user.username},(err,session)=>{
       if (err){
         reject(err);

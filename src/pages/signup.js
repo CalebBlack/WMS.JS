@@ -1,6 +1,8 @@
 import React from 'react';
 import request from '../functions/request';
+import {connect} from 'react-redux';
 import './signup.less';
+import * as loginActions from '../redux/actions/login';
 
 class Signup extends React.Component {
   constructor(props){
@@ -24,14 +26,11 @@ class Signup extends React.Component {
     let username = this.username ? this.username.value : null;
     let password = this.password ? this.password.value : null;
     let email = this.email ? this.email.value : null;
+    console.log('an',username,password,email);
     if (typeof username == 'string' && typeof password == 'string' && username.length > 0 && password.length > 7 && typeof email == 'string' && email.length > 4) {
-      request('/api/signup','post',{auth:[username,password],body:{email}}).then(response=>{
-        console.log(response);
-      }).catch(err=>{
-        console.log(err);
-      });
+      this.props.dispatch(loginActions.signup(username,password,email));
     }
   }
 }
 
-export default Signup;
+export default connect()(Signup);

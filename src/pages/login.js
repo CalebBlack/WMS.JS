@@ -1,6 +1,8 @@
 import React from 'react';
 import request from '../functions/request';
 import './login.less';
+import * as loginActions from '../redux/actions/login';
+import {connect} from 'react-redux';
 
 class Login extends React.Component {
   constructor(props){
@@ -16,6 +18,7 @@ class Login extends React.Component {
           <input placeholder='Password' ref={ref=>{this.password = ref}} className='password' type='password'/>
           <button onClick={this.submit} className='submit'>Login</button>
         </form>
+        <a href='/signup' className='tosignup'>New User?</a>
       </div>
     );
   }
@@ -23,13 +26,9 @@ class Login extends React.Component {
     let username = this.username ? this.username.value : null;
     let password = this.password ? this.password.value : null;
     if (typeof username == 'string' && typeof password == 'string' && username.length > 0 && password.length > 7) {
-      request('/api/login','post',{auth:[username,password]}).then(response=>{
-        console.log(response);
-      }).catch(err=>{
-        console.log(err);
-      });
+      this.props.dispatch(loginActions.login(username,password));
     }
   }
 }
 
-export default Login;
+export default connect()(Login);

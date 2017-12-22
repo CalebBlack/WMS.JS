@@ -5,7 +5,7 @@ class Header extends React.Component {
   render(){
     return (
       <header className='primary'>
-        <Nav links={[['Movies','movies'],['Anime','anime'],['Games','games']]}/>
+        <Nav links={[['Movies','movies'],['Anime','anime'],['Shows','shows'],['Games','games']]}/>
       </header>
     )
   }

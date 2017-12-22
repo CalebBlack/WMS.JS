@@ -37,16 +37,13 @@ api.get('/', (req, res) => {
 api.post('/signup', (req, res) => {
   auth = decodeAuthHeaders(req);
   auth[0] = auth[0].toLowerCase();
-  step();
   if (auth && auth.length == 2 && auth[0].length > 0 && auth[1].length > 7) {
-    step();
     let usernameValid = validate.username(auth[0]);
     let passwordValid = validate.password(auth[1]);
     if (usernameValid === true && passwordValid === true) {
       if (req.body) {
         if (req.body.email) {
           if (typeof req.body.email == 'string' && Isemail.validate(req.body.email) && req.body.email.length > 4) {
-            step();
             var userData = {
               displayname: auth[0],
               username: auth[0],

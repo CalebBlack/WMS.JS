@@ -1,5 +1,6 @@
 import React from 'react';
-import {Switch, Route} from 'react-router-dom';
+import {Switch, Route, withRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
 import Lost from './pages/lost';
 import Logout from './pages/logout';
 import Login from './pages/login';
@@ -10,7 +11,11 @@ import './router.css';
 
 class Router extends React.Component {
   render(){
-    return (
+    var location = this.props ? this.props.location ? this.props.location.pathname : null : null;
+    if (this.props.loggedIn !== true && location !== '/signup') {
+      return (<div className='page' id='page'><Login/></div>);
+    } else {
+      return (
       <div className='page' id='page'>
         <Switch>
           <Route exact path='/' component={Home}/>
@@ -21,7 +26,8 @@ class Router extends React.Component {
           <Route path='/' component={Lost}/>
         </Switch>
       </div>
-    );
+      );
+    }
   }
 }
-export default Router;
+export default withRouter(connect(state=>{return {loggedIn:state.loggedIn}})(Router));

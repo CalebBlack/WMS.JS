@@ -1,6 +1,9 @@
 import React from 'react';
 import Player from '../components/player';
-import {Redirect} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
+import AnimeViewer from './animeviewer';
 import './viewer.less';
 
 class Viewer extends React.Component {
@@ -8,6 +11,7 @@ class Viewer extends React.Component {
     super(props);
     this.onEnd = this.onEnd.bind(this);
     this.state = {redirect:null};
+    this.renderVideo = this.renderVideo.bind(this);
   }
   componentWillMount(){
     let url = this.props && this.props.location && this.props.location.pathname ? this.props.location.pathname : null;
@@ -24,15 +28,24 @@ class Viewer extends React.Component {
   render(){
     if (this.state.redirect !== null) {
       return (<Redirect to={this.state.redirect}/>);
-    } else if (this.url) {
-      return (
-        <div className='viewer'>
-          <Player onEnd={this.onEnd} className='center' source={'/api/'+this.type+'/'+this.path}/>
-        </div>
-      );
+    } else if (this.type === 'anime'){
+      if (this.path.includes('.')) {
+        return this.renderVideo('/api/'+this.type+'/'+this.path);
+      } else {
+        return (<AnimeViewer path={this.path}/>);
+      }
+    } else if (this.type === 'movies') {
+      return this.renderVideo('/api/'+this.type+'/'+this.path);
     } else {
       return (<p>Loading...</p>);
     }
+  }
+  renderVideo(url) {
+    return (
+      <div className='viewer'>
+        <Player onEnd={this.onEnd} className='center' source={url}/>
+      </div>
+    );
   }
   onEnd(e){
     console.log('endeded',this.type);
@@ -44,4 +57,4 @@ class Viewer extends React.Component {
     }
   }
 }
-export default Viewer;
+export default withRouter(connect()(Viewer));

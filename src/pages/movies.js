@@ -4,11 +4,9 @@ import {Link} from 'react-router-dom';
 import getList from '../redux/actions/getlist';
 import request from '../functions/request';
 import HomeLink from '../components/homelink';
+import toTitleCase from '../functions/totitlecase';
 import './movies.less';
 
-function toTitleCase(str){
-  return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-}
 
 class Movies extends React.Component {
   componentWillMount(){

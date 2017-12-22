@@ -4,6 +4,7 @@ import {Link, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import ShowViewer from './showviewer';
+import Shows from './shows';
 import './viewer.less';
 
 class Viewer extends React.Component {
@@ -29,7 +30,9 @@ class Viewer extends React.Component {
     if (this.state.redirect !== null) {
       return (<Redirect to={this.state.redirect}/>);
     } else {
-      if (this.path.includes('.')) {
+      if (this.path.length < 1) {
+        return (<Shows type={this.type}/>)
+      } else if (this.path.includes('.')) {
         return this.renderVideo('/api/'+this.type+'/'+this.path);
       } else {
         return (<ShowViewer type={this.type} path={this.path}/>);

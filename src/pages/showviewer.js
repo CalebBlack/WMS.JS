@@ -27,7 +27,7 @@ class AnimeViewer extends React.Component {
           return (this.renderVideo('/api/'+type+'/'+this.path));
         } else {
           return (
-            <div className='anime'>
+            <div className='show'>
             <HomeLink/>
             <h1 className='title'>Episodes</h1>
             <ul className='list episodelist'>
@@ -42,7 +42,7 @@ class AnimeViewer extends React.Component {
         }
       } else {
         return (
-          <div className='anime'>
+          <div className='show'>
           <HomeLink/>
           <h1 className='title'>Seasons</h1>
           <ul className='list seasonlist'>

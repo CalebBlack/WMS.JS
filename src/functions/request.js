@@ -1,6 +1,6 @@
 const validMethods = ['get','patch','put','post','delete','update'];
 
-function request(url,method='get',options={}) {
+function request(url,method='get',options={},authenticate=false) {
   if (typeof url != 'string' || url.length < 1) throw new Error('Request: Invalid URL');
   if (typeof method != 'string' || method.length < 1 || !validMethods.includes(method)) throw new Error('Request: Invalid Method');
   if (typeof options != 'object') throw new Error('Invalid Options');
@@ -22,7 +22,14 @@ function request(url,method='get',options={}) {
     if (options.headers) {
       Object.entries(options.headers).forEach(pair=>{
         xhr.setRequestHeader(pair[0],pair[1]);
-      })
+      });
+    }
+    if (authenticate === true) {
+      if (localStorage.session) {
+        xhr.setRequestHeader('session',localStorage.session);
+      } else {
+        return reject('Credentials Missing');
+      }
     }
     xhr.onload = function () {
       if (xhr.status >= 200 && xhr.status <= 304) {

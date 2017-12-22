@@ -8,7 +8,6 @@ class Home extends React.Component {
       <div className='home'>
         <Header/>
         <LogoutLink/>
-        <p>There&#39;s no place like home...</p>
       </div>
     )
   }

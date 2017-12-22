@@ -15,7 +15,7 @@ class Router extends React.Component {
     if (this.props.loggedIn !== true && location !== '/signup') {
       return (<div className='page' id='page'><Login/></div>);
     } else {
-      let viewers = ['movies','anime','shows'].map(name=>'/'+name).map((path,index)=>{
+      let viewers = ['movies','anime','shows','cartoons'].map(name=>'/'+name).map((path,index)=>{
         return (<Route key={index} path={path} component={Viewer}/>)
       });
       return (

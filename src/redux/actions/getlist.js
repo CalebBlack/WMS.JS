@@ -10,7 +10,6 @@ export default function getList(name,callback=()=>{}){
       request('/api/'+name+'/').then(list=>{
         var list = safeParse(list);
         if (list) {
-          console.log({type:setList,name,list});
           dispatch({type:setList,name,list});
           callback(null,list);
         } else {

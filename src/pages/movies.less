@@ -7,9 +7,24 @@
   }
   .movielist {
     list-style: none;
+    padding: 0;
+    max-height: 70vh;
+    overflow-y: auto;
     .movie {
-      margin: 10px 0;
+      margin: 20px 0;
       font-size: 1.4em;
+      font-family: 'Vollkorn SC', serif;
+      a {
+        border: 2px solid #8c8a96;
+        border-width: 2px 0;
+        margin: auto 0;
+        background-color: fade(#1a0080 , 35%);
+        padding: 0 10px;
+        border-radius: 2px;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
   }
 }

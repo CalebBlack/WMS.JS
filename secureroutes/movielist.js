@@ -7,7 +7,6 @@ let movielist = null;
 fs.readdir(path.join('raw/','movies/'),(err,files)=>{
   if (err) return movielist = err;
   movielist = files.filter(moviename=>!moviename.endsWith('.gitignore'));
-  console.log(movielist);
 });
 
 module.exports = ['get','/movies',(req,res)=>{

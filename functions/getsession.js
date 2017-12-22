@@ -2,6 +2,7 @@ const {Session} = require('../models');
 
 function getSession(user){
   return new Promise((resolve,reject)=>{
+    console.log(user);
     if (user.approved !== true){
       return reject('User not approved');
     }
